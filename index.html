@@ -282,27 +282,122 @@
                 setTimeout(() => el.remove(), 18000);
             }, 1500);
         }
-
-        const cardsData = [
-            { type: 'image', src: 'pic1.jpg', audio: 'song1.mp3', icon: '♡', frontText: 'Cutie Pie 🎀', lyrics: [{ time: 0, text: "🎵..." }, { time: 2, text: "Chaand si mehbooba ho meri... 🌙" }, { time: 6, text: "Kab aisa maine socha tha..." }, { time: 10, text: "Haan tum bilkul waisi ho... 💖" }, { time: 13, text: "Jaisa maine socha tha ✨" }] },
-            { type: 'image', src: 'pic2.jpg', audio: 'song2.mp3', icon: '✧', frontText: 'Your Smile 😊', lyrics: [{ time: 0, text: "Tu hi haqeeqat khwaab tu... ✨" }, { time: 4, text: "Dariya tu hi pyas tu... 🌊" }, { time: 8, text: "Tu hi dil ki beqarari... 💓" }, { time: 11, text: "Tu sukoon, tu sukoon... 🕊️" }] },
-            { type: 'image', src: 'pic3.jpg', audio: 'song3.mp3', icon: '☆', frontText: 'You Shine 🌟', lyrics: [{ time: 0, text: "🎵 Playing music..." }, { time: 4, text: "Brighter than any star! 🌟" }, { time: 8, text: "My Queen 👑" }] }
-        ];
-        
         // 🤍 NO EMOJIS FOR CARD FRONTS, ONLY TEXT SYMBOLS
         const textIcons = ['♡', '✧', '☆', '✿', '<3', '❀', '✦', '♥'];
+
+        // 🎶 1 to 10 CARDS DATA WITH FULL LYRICS
+        const cardsData = [
+            // 1st Song
+            { type: 'image', src: 'pic1.jpg', audio: 'song1.mp3', icon: '♡', frontText: 'Cutie Pie 🎀', lyrics: [
+                { time: 0, text: "🎵..." }, 
+                { time: 2, text: "Chaand si mehbooba ho meri... 🌙" }, 
+                { time: 6, text: "Kab aisa maine socha tha..." }, 
+                { time: 10, text: "Haan tum bilkul waisi ho... 💖" }, 
+                { time: 13, text: "Jaisa maine socha tha ✨" }
+            ] },
+            
+            // 2nd Song
+            { type: 'image', src: 'pic2.jpg', audio: 'song2.mp3', icon: '✧', frontText: 'Your Smile 😊', lyrics: [
+                { time: 0, text: "Tu hi haqeeqat khwaab tu... ✨" }, 
+                { time: 4, text: "Dariya tu hi pyas tu... 🌊" }, 
+                { time: 8, text: "Tu hi dil ki beqarari... 💓" }, 
+                { time: 11, text: "Tu sukoon, tu sukoon... 🕊️" }
+            ] },
+            
+            // 3rd Song (Naagmani)
+            { type: 'image', src: 'pic3.jpg', audio: 'song3.mp3', icon: '☆', frontText: 'Noor ✨', lyrics: [ 
+                { time: 0, text: "🎵..." }, 
+                { time: 2, text: "Mukhde se tere aesa noor barse... ✨" }, 
+                { time: 6, text: "Fiki pade chand ki bhi chandni... 🌙" }, 
+                { time: 10, text: "Seene se laga ke rakhun jaan meri... 💖" } 
+            ] },
+
+            // 4th Song (Akh Meri Has Deve)
+            { type: 'image', src: 'pic4.jpg', audio: 'song4.mp3', icon: '✿', frontText: 'Smile 😊', lyrics: [
+                { time: 0, text: "🎵..." },
+                { time: 2, text: "Akh meri hass deve... ✨" },
+                { time: 6, text: "Jadon tainu takk da... 👀" },
+                { time: 10, text: "Jaan ton vi zyada tu paas mainu lagda... 💖" }
+            ] },
+
+            // 5th Song (Chehra Ek Phool)
+            { type: 'image', src: 'pic5.jpg', audio: 'song5.mp3', icon: '<3', frontText: 'Phool Si 🌸', lyrics: [
+                { time: 0, text: "🎵..." },
+                { time: 2, text: "Chehra ek phool ki tarah shadab hai... 🌸" },
+                { time: 6, text: "Chehra uska hai ya koi mahtab hai... 🌙" },
+                { time: 10, text: "Chehra jaise ghazal, jaise kamal... 🪷" }
+            ] },
+
+            // 6th Song (Khuda Bhi)
+            { type: 'image', src: 'pic6.jpg', audio: 'song6.mp3', icon: '❀', frontText: 'Anmol ✨', lyrics: [
+                { time: 0, text: "🎵..." },
+                { time: 2, text: "Zameen tere paanv tale aayi... 🌍" },
+                { time: 6, text: "Khuda bhi jab tujhe mere paas dekhta hoga... ✨" },
+                { time: 10, text: "Itni anmol cheez de di, kaise sochta hoga... 🥺" }
+            ] },
+
+            // 7th Song (Hansta Hua Noorani)
+            { type: 'image', src: 'pic7.jpg', audio: 'song7.mp3', icon: '✦', frontText: 'Noorani ✨', lyrics: [
+                { time: 0, text: "🎵..." },
+                { time: 2, text: "Hansta hua noorani chehra... ✨" },
+                { time: 5, text: "Kaali zulfen rang sunehra... 🖤" },
+                { time: 8, text: "Teri jawani tauba tauba re... 🙈" },
+                { time: 12, text: "Dilruba... dilruba... 💖" }
+            ] },
+
+            // 8th Song (Soch Na Sake)
+            { type: 'image', src: 'pic8.jpg', audio: 'song8.mp3', icon: '♥', frontText: 'Zindagi 🌍', lyrics: [
+                { time: 0, text: "🎵..." },
+                { time: 2, text: "Kuch bhi nahi hai ye jahan... 🌍" },
+                { time: 6, text: "Tu hai toh hai isme zindagi... ✨" },
+                { time: 10, text: "Tu hi safar hai aakhiri... 🛣️" }
+            ] },
+
+            // 9th Song (Kaatil Hain Aankhein)
+            { type: 'image', src: 'pic9.jpg', audio: 'song9.mp3', icon: '♡', frontText: 'Aankhein 👀', lyrics: [
+                { time: 0, text: "🎵..." },
+                { time: 2, text: "Kaatil hain aankhein, par na inko saza hai... 👀" },
+                { time: 6, text: "Ghalti aankhon ki lage... 🫣" },
+                { time: 10, text: "Dil ki khata hai... ❤️‍🩹" }
+            ] },
+
+            // 10th Song (Tu Jaane Na)
+            { type: 'image', src: 'pic10.jpg', audio: 'song10.mp3', icon: '✧', frontText: 'Tu Jaane Na 💔', lyrics: [
+                { time: 0, text: "🎵..." },
+                { time: 2, text: "Kaise batayein kyun tujhko chahein... 🥺" },
+                { time: 6, text: "Yaara bata na paayein... 🤐" },
+                { time: 10, text: "Tu jaane na... 💔" }
+            ] }
+        ];
         
-        for(let i = 4; i <= 21; i++) { 
-            cardsData.push({ type: 'image', src: `pic${i}.jpg`, audio: `song${i}.mp3`, icon: textIcons[i % textIcons.length], frontText: `Memory ${i} ✨`, lyrics: [{ time: 0, text: "🎵 Playing music..." }, { time: 4, text: "Looking awesome here! 😎" }, { time: 8, text: "Best friend vibes ✌️" }] }); 
+        // AUTO-FILL FOR CARD 11 TO 21
+        for(let i = 11; i <= 21; i++) { 
+            cardsData.push({ 
+                type: 'image', 
+                src: `pic${i}.jpg`, 
+                audio: `song${i}.mp3`, 
+                icon: textIcons[i % textIcons.length], 
+                frontText: `Memory ${i} ✨`, 
+                lyrics: [
+                    { time: 0, text: "🎵 Playing music..." }, 
+                    { time: 4, text: "Looking awesome here! 😎" }, 
+                    { time: 8, text: "Best friend vibes ✌️" }
+                ] 
+            }); 
         }
-        
+
+        // CARD 22: THE LETTER MODAL
         cardsData.push({ type: 'letter_modal', icon: '✉', frontText: 'Special Letter', audio: 'letter_song.mp3' });
+
+        
+        
+        
 
         const uniqueCardWords = [
             "Cutie", "Nautanki", "Mahila Mitr", "BFF", "Bestie", 
-            "Drama Queen", "Pagal", "Vibe", "Golu", "Favourite", 
+            "Drama Queen", "Pagal", "Vibe", "Kitu", "Favourite", 
             "Yaar", "Shining", "Precious", "Ziddi", "Ajooba", 
-            "Superstar", "Chatterbox", "Dumbo", "Heroine", "Sathiya", "Smile"
+            "Superstar", "Chatterbox", "Dumbo", "Heroine", "Bholi", "Smile"
         ];
 
         let currentAudio = null; 
