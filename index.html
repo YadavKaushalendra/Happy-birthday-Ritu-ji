@@ -233,13 +233,11 @@
             document.getElementById(`intro-step-${nextStep}`).style.display = 'block';
         }
         
-        // 🎵 GLOBAL HBD MUSIC 
         let bgMusic = new Audio('hbd.mp3');
         bgMusic.loop = true; 
         bgMusic.volume = 0.5; 
 
         function showSurprise() { 
-            // 🎇 ELEGANT RED/PINK CONFETTI
             const end = Date.now() + 3500; 
             const colors = ['#ff1a4a', '#ff4d6a', '#ffb3c1', '#ffffff'];
             (function frame() {
@@ -262,7 +260,6 @@
             }, 100); 
         }
         
-        // 🔥 GENERATING PURE CSS HEARTS TO FLOAT
         function startFloatingHearts() { 
             setInterval(() => { 
                 const heart = document.createElement("div"); 
@@ -277,8 +274,6 @@
                 setTimeout(() => heart.remove(), 15000); 
             }, 600); 
         }
-
-        const textIcons = ['✧', '☆', '✿', '❀', '✦', '★', '❆'];
 
         const cardsData = [
             // 1st Song
@@ -380,7 +375,6 @@
                 let backContent = '';
                 
                 if (data.type === 'image') {
-                    // 🐻 ADDED THE BEAR STICKER BACK HERE!
                     backContent = `
                         <div class="polaroid-back">
                             <img src="bear_sticker.png" class="bear-sticker" alt="Peeking Bear">
@@ -414,8 +408,6 @@
             }
         }
         
-        // 🌟 MAGICAL LETTER LOGIC (ROMANTIC THEME)
-        const letterMessage =         // 🌟 FINAL MASTERPIECE LETTER LOGIC 
         const letterMessage = "Happiest Birthday Ritu ji... ✨\n\nKaisa laga surprise? Hope aapko achha laga hoga... Bas aapke special day ko thoda aur special banane ki meri ek chhoti si koshish thi.\n\nCoding itni aati nahi thi, resources bhi kam the, nahi toh shayad aur achhi banata. Aur sabse main cheez... boundaries ki respect, isliye utna kar nahi paya jitna socha tha.\n\nPadhai ke beech har din se 2-3 ghante nikalna kisi khaas ke liye... 😉 Waise ye sab tab (tablet) se hi banaya hai, bas special thanks to Urvesh jiske laptop se aakhiri mein kuch kaam aasan ho gaya.\n\nKuch afsos bhi hai, kuch khushi bhi 🙂... Main bhi kya kya likhne laga...\n\nEnjoy your day! Next year saath mein manayenge. Krishan ji aapko wo sab dein jo aapke liye achha ho, jo aapko pasand ho, duniya ki saari khushiyan aapko milein. 🫠 Aise hi hanste raho.\n\nEk baat aur socha ki bol doon...\nBabu, Drama mein humein dono side dikhayi jaati hain, par real life humein khud samajhni hoti hai...\n\nHappiest Birthday Mahila Mitr! 🎀\n\nMere liye ye kaafi badi baat hai itna kuch karna. As you know I'm an introvert, toh ye kisi jung se kam nahi tha mere liye. Overthinking karte karte aakhir itna aap tak pahuncha, hehehe 🫠\n\nBas 'Thank You' bol kar mujhe sharminda mat karna, emotions ko thanks nahi bolte babu. ❤️\n\nShayad Aapka Apna,\nKaushal";
 
         let typingTimeout;
