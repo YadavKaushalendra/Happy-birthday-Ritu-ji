@@ -1,10 +1,464 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Happy Birthday Ritu Ji</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For You 💌</title>
+    
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <style>
+        /* --- FONTS --- */
+        @import url('https://fonts.googleapis.com/css2?family=Just+Me+Again+Down+Here&family=Poppins:wght@300;400;500;600;700&display=swap');
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        /* 🌹 DEEP ROMANTIC BACKGROUND */
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        body { 
+            font-family: 'Poppins', sans-serif; 
+            background: linear-gradient(-45deg, #ff9a9e, #fecfef, #fbc2eb, #a18cd1);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            color: #333; 
+            height: 100vh; overflow: hidden; display: flex; align-items: center; justify-content: center; 
+        }
+        
+        body.pink-magic { 
+            background: linear-gradient(-45deg, #ffc3a0, #ffafbd, #ff9a9e, #fecfef);
+            background-size: 400% 400%;
+            animation: gradientBG 20s ease infinite;
+            background-attachment: fixed;
+            overflow-y: auto; align-items: flex-start; height: auto; min-height: 100vh; padding-bottom: 80px; overflow-x: hidden; 
+        }
+
+        /* ✨ FLOATING CSS ART HEARTS */
+        .floating-css-heart {
+            position: fixed; bottom: -100px; z-index: 5; pointer-events: none;
+            width: 15px; height: 15px; background: rgba(255, 77, 106, 0.6);
+            transform: rotate(-45deg); filter: drop-shadow(0 0 10px rgba(255, 77, 106, 0.4));
+            animation: floatUpHeart linear infinite;
+        }
+        .floating-css-heart::before, .floating-css-heart::after {
+            content: ''; position: absolute; width: 15px; height: 15px;
+            background: inherit; border-radius: 50%;
+        }
+        .floating-css-heart::before { top: -7.5px; left: 0; }
+        .floating-css-heart::after { left: 7.5px; top: 0; }
+        
+        @keyframes floatUpHeart { 
+            0% { transform: translateY(0) rotate(-45deg) scale(0.8); opacity: 0; } 
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-120vh) rotate(-15deg) scale(1.5); opacity: 0; } 
+        }
+
+        /* --- ⏳ ELEGANT LOADER --- */
+        #loader { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(-45deg, #ff9a9e, #fecfef); z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: opacity 1s ease; }
+        .spinner { width: 50px; height: 50px; border: 4px solid rgba(255, 77, 106, 0.2); border-top-color: #ff4d6a; border-radius: 50%; animation: spin 1s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite; margin-bottom: 25px; box-shadow: 0 0 15px rgba(255, 77, 106, 0.3); }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .loader-text { font-size: 1.1rem; color: #d81b60; font-weight: 600; letter-spacing: 2px; }
+
+        /* --- LIGHT PREMIUM GLASS CARDS --- */
+        .glass-card { background: rgba(255, 255, 255, 0.3); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.6); padding: 50px 40px; border-radius: 24px; text-align: center; box-shadow: 0 20px 50px rgba(0,0,0,0.1); max-width: 420px; z-index: 100; transition: transform 0.8s ease, opacity 0.8s ease; display: none; }
+        .glass-card h2 { font-size: 2.2rem; color: #d81b60; text-shadow: 1px 1px 3px rgba(255,255,255,0.8); margin-bottom: 20px; font-weight: 700; }
+        .glass-card p { font-size: 1.1rem; margin-bottom: 35px; font-weight: 500; color: #4a4a4a; line-height: 1.6; }
+        
+        /* 😈 THE TRICKY BUTTONS */
+        .btn { padding: 14px 30px; margin: 10px; border: none; border-radius: 50px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease; font-family: 'Poppins', sans-serif; letter-spacing: 1px; }
+        
+        .btn-yes, .btn-no { 
+            background: linear-gradient(45deg, #ff758c, #ff7eb3); 
+            color: white; 
+            box-shadow: 0 8px 20px rgba(255, 117, 140, 0.4); 
+            position: relative;
+        }
+        .btn-yes:hover { transform: translateY(-3px) scale(1.05); box-shadow: 0 12px 25px rgba(255, 117, 140, 0.6); }
+        .btn-no { z-index: 200; }
+
+        /* --- GALLERY HEADER & CSS ART --- */
+        #galleryPage { display: none; width: 100%; padding: 60px 20px; text-align: center; opacity: 0; transition: opacity 1.5s ease; position: relative; z-index: 10; }
+        
+        /* 🔥 PURE CSS BEATING HEART ART */
+        .art-heart-container { display: flex; justify-content: center; margin-bottom: 30px; margin-top: 20px; }
+        .pure-css-heart { position: relative; width: 40px; height: 40px; background: #ff4d6a; transform: rotate(-45deg); box-shadow: 0 0 30px rgba(255, 77, 106, 0.6); animation: heartbeat 1.2s infinite cubic-bezier(0.215, 0.61, 0.355, 1); }
+        .pure-css-heart::before, .pure-css-heart::after { content: ''; position: absolute; width: 40px; height: 40px; background: #ff4d6a; border-radius: 50%; }
+        .pure-css-heart::before { top: -20px; left: 0; }
+        .pure-css-heart::after { left: 20px; top: 0; }
+        @keyframes heartbeat { 0% { transform: rotate(-45deg) scale(1); } 14% { transform: rotate(-45deg) scale(1.3); } 28% { transform: rotate(-45deg) scale(1); } 42% { transform: rotate(-45deg) scale(1.3); } 70% { transform: rotate(-45deg) scale(1); } }
+
+        #mainTitle { font-size: 2.5rem; font-weight: 700; color: #d81b60; letter-spacing: 2px; text-shadow: 2px 2px 4px rgba(255,255,255,0.8); margin-bottom: 50px; text-transform: uppercase; }
+        .photo-grid { display: flex; flex-wrap: wrap; gap: 80px 40px; justify-content: center; margin-top: 30px; }
+
+        /* --- 🧸 POLAROID CARDS --- */
+        .polaroid-wrapper { perspective: 1200px; width: 250px; height: 350px; position: relative; cursor: pointer; transform-origin: top center; animation: swing 6s ease-in-out infinite alternate; z-index: 10; }
+        .polaroid-wrapper:nth-child(even) { animation-delay: 1.5s; animation-duration: 7s; }
+        .polaroid-wrapper:nth-child(3n) { animation-delay: 2.5s; animation-duration: 6.5s; }
+        
+        .polaroid-wrapper::before { content: ''; position: absolute; top: -80px; left: 50%; transform: translateX(-50%); width: 2px; height: 80px; background: rgba(255, 255, 255, 0.8); z-index: -1; }
+        .polaroid-wrapper::after { content: ''; position: absolute; top: -85px; left: 50%; transform: translateX(-50%); width: 14px; height: 14px; background: #ff4d6a; border-radius: 50%; box-shadow: 0 0 10px rgba(255,77,106,0.6); z-index: 10; }
+
+        .polaroid-inner { position: relative; width: 100%; height: 100%; text-align: center; transition: transform 0.9s cubic-bezier(0.175, 0.885, 0.32, 1.275); transform-style: preserve-3d; border-radius: 8px; box-shadow: 0 20px 40px rgba(0,0,0,0.15); }
+        .polaroid-wrapper:hover .polaroid-inner { box-shadow: 0 20px 50px rgba(255, 77, 106, 0.2); }
+        .polaroid-inner.flipped { transform: rotateY(180deg); }
+        .polaroid-front, .polaroid-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; background: white; border-radius: 8px; }
+
+        .polaroid-front { padding: 15px 15px 65px 15px; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; border: 1px solid #ffe6eb; }
+        .pink-square { background: #fff0f3; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; border-radius: 4px; border: 1px dashed #ffb3c1; }
+        .pink-square .icon { font-size: 3rem; color: #ff4d6a; opacity: 0.8; }
+        .polaroid-front h3 { position: absolute; bottom: 20px; left: 0; width: 100%; font-size: 1.1rem; color: #d81b60; font-weight: 600; letter-spacing: 1px; }
+
+        .polaroid-back { transform: rotateY(180deg); padding: 12px 12px 75px 12px; position: relative; background: #fff; }
+        .polaroid-back .main-photo { width: 100%; height: 100%; object-fit: cover; border-radius: 4px; position: relative; z-index: 2; }
+        
+        /* 🐻 PEEKING BEAR STICKER */
+        .bear-sticker { position: absolute; top: -40px; left: 50%; transform: translateX(-50%); width: 130px; height: auto; z-index: 1; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.2)); }
+        
+        .lyrics-box { position: absolute; bottom: 15px; left: 0; width: 100%; padding: 0 15px; z-index: 3; }
+        .lyrics-text { font-size: 0.9rem; color: #d81b60; font-weight: 600; font-family: 'Poppins', sans-serif; text-align: center; margin: 0; transition: all 0.3s ease; line-height: 1.4; }
+
+        /* 🌟 MAGICAL TYPEWRITER LETTER MODAL */
+        .letter-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(ellipse at bottom, #2b1055 0%, #7597de 100%); z-index: 2000; display: flex; justify-content: center; align-items: center; overflow: hidden; opacity: 0; transition: opacity 1s ease; }
+        .letter-modal.show { opacity: 1; }
+        .hidden { display: none !important; }
+
+        .glass-box { position: relative; z-index: 10; width: 85%; max-width: 450px; max-height: 75vh; background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.3); border-radius: 20px; padding: 40px; box-shadow: 0 20px 50px rgba(0,0,0,0.3); overflow-y: auto; transform: translateY(50px); transition: transform 1s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .letter-modal.show .glass-box { transform: translateY(0); }
+
+        .letter-content { color: #fff; font-family: 'Courier New', Courier, monospace; font-size: 16px; line-height: 2; text-align: left; text-shadow: 0 0 5px rgba(255,255,255,0.3); }
+        
+        .stars { position: absolute; width: 2px; height: 2px; background: transparent; box-shadow: 10px 10px #fff, 50px 80px #fff, 150px 30px #fff, 250px 120px #fff, 300px 50px #fff, 80px 200px #fff, 200px 250px #fff, 350px 300px #fff, 100px 100px #fff, 280px 220px #fff, 400px 150px #fff, 50px 350px #fff; animation: twinkle 4s infinite alternate; }
+        @keyframes twinkle { 0% { opacity: 0.2; transform: scale(0.8); } 100% { opacity: 1; transform: scale(1.2); } }
+        
+        .close-letter-btn { position: absolute; top: 15px; right: 25px; font-size: 30px; color: #fff; cursor: pointer; opacity: 0.7; transition: all 0.3s; }
+        .close-letter-btn:hover { opacity: 1; transform: rotate(90deg); }
+
+        @keyframes swing { 0% { transform: rotate(4deg); } 100% { transform: rotate(-4deg); } }
+
+        /* --- MOBILE --- */
+        @media (max-width: 600px) {
+            .photo-grid { gap: 60px 20px; margin-top: 20px; } .polaroid-wrapper { width: 150px; height: 220px; } .pink-square .icon { font-size: 2rem; } .polaroid-front h3 { font-size: 0.9rem; bottom: 10px; } .polaroid-back { padding: 8px 8px 55px 8px; } .lyrics-text { font-size: 0.75rem; } #mainTitle { font-size: 1.8rem; margin-bottom: 30px; } .glass-card { padding: 30px 20px; } .glass-card h2 { font-size: 1.8rem; } .bear-sticker { width: 90px; top: -30px; }
+        }
+    </style>
 </head>
 <body>
-    <h1 id='mainTitle'>Happiest Birthday Mahila Mitr ✨</h1>
-    <p>Wishing you a fantastic year ahead!</p>
+
+    <div id="loader">
+        <div class="spinner"></div>
+        <div id="loadingText" class="loader-text">ADDING MAGIC...</div>
+    </div>
+
+    <div id="intro-step-1" class="glass-card">
+        <h2>Ruko Zara! ✋</h2>
+        <p>Aage badhne se pehle verification zaroori hai.<br>Tum wahi meri favourite nautanki ho na? 👀✨</p>
+        <button class="btn btn-yes" onclick="nextStep(1, 2)">Haan, main hi hu! 🙄</button>
+        <button class="btn btn-no" onmouseover="runAway(this)" onclick="runAway(this)">Nahi, main koi aur hu 👽</button>
+    </div>
+
+    <div id="intro-step-2" class="glass-card" style="display: none;">
+        <h2>Sach-Sach Batana... 🫣</h2>
+        <p>Tumhari smile itni cute naturally hai, ya photo lene se pehle alag se filter lagati ho? 🤭</p>
+        <button class="btn btn-yes" onclick="nextStep(2, 3)">100% Natural Cutie! 😌</button>
+        <button class="btn btn-no" onmouseover="runAway(this)" onclick="runAway(this)">Filters ka kamaal hai 🤫</button>
+    </div>
+
+    <div id="intro-step-3" class="glass-card" style="display: none;">
+        <h2>Guroor Mat Karna... 💅</h2>
+        <p>Par ye batao, mere jaisa itna sweet aur tumhare nakhre 'jhelne' wala dost milkar kaisa lagta hai? 😎</p>
+        <button class="btn btn-yes" onclick="nextStep(3, 4)">Bohot lucky feel karti hu! 😇</button>
+        <button class="btn btn-no" onmouseover="runAway(this)" onclick="runAway(this)">Kismat kharab thi 🤦‍♀️</button>
+    </div>
+
+    <div id="intro-step-4" class="glass-card" style="display: none;">
+        <h2>Ek Baat Bolu? 🫣</h2>
+        <p>Maine tumhari aisi-aisi ajeeb photos dhoondh nikali hain, jisme tum sach mein kisi 'Ajoobe' se kam nahi lag rahi... 🫠</p>
+        <button class="btn btn-yes" onclick="nextStep(4, 5)">Dikhao kitni buri hai! 🫣</button>
+        <button class="btn btn-no" onmouseover="runAway(this)" onclick="runAway(this)">Beizzati hogi 🏃‍♀️</button>
+    </div>
+
+    <div id="intro-step-5" class="glass-card" style="display: none;">
+        <h2>Tension Mat Lo! 😂</h2>
+        <p>Mazaak tha! Un ajeeb photos mein bhi tum hamesha ki tarah cute hi lag rahi ho. <br><br>Dekhna hai apna avatar? 🎀</p>
+        <button class="btn btn-yes" onclick="nextStep(5, 6)">Sabr nahi ho raha! ⏳</button>
+        <button class="btn btn-no" onmouseover="runAway(this)" onclick="runAway(this)">Darr lag raha hai 🥶</button>
+    </div>
+
+    <div id="intro-step-6" class="glass-card" style="display: none;">
+        <h2>Heartbeat Normal Kar Lo 💓</h2>
+        <p>Bas tumhare special din ke liye ek chhota sa magical effort kiya hai.<br><br>Ready for the magic? ✨</p>
+        <button class="btn btn-yes" onclick="showSurprise()">Let's Gooo! ❤️</button>
+    </div>
+
+    <div id="galleryPage">
+        <div class="art-heart-container">
+            <div class="pure-css-heart"></div>
+        </div>
+        <h1 id="mainTitle">Happiest Birthday ✨</h1>
+        <div class="photo-grid" id="photoGrid"></div>
+    </div>
+    
+    <div id="letterModal" class="letter-modal hidden">
+        <div class="stars"></div>
+        <div class="glass-box">
+            <span class="close-letter-btn" onclick="closeLetter()">&times;</span>
+            <div id="typewriterText" class="letter-content"></div>
+        </div>
+    </div>
+    
+    <script>
+        window.addEventListener('load', () => {
+            const loader = document.getElementById('loader');
+            setTimeout(() => {
+                loader.style.opacity = '0';
+                setTimeout(() => {
+                    loader.style.display = 'none';
+                    document.getElementById('intro-step-1').style.display = 'block'; 
+                }, 1000);
+            }, 3000); 
+        });
+
+        function runAway(btnElement) { 
+            btnElement.style.position = 'fixed'; 
+            btnElement.style.left = Math.max(10, Math.random() * (window.innerWidth - 100)) + 'px'; 
+            btnElement.style.top = Math.max(10, Math.random() * (window.innerHeight - 50)) + 'px'; 
+        }
+
+        function nextStep(currentStep, nextStep) {
+            document.getElementById(`intro-step-${currentStep}`).style.display = 'none';
+            document.getElementById(`intro-step-${nextStep}`).style.display = 'block';
+        }
+        
+        // 🎵 GLOBAL HBD MUSIC 
+        let bgMusic = new Audio('hbd.mp3');
+        bgMusic.loop = true; 
+        bgMusic.volume = 0.5; 
+
+        function showSurprise() { 
+            // 🎇 ELEGANT RED/PINK CONFETTI
+            const end = Date.now() + 3500; 
+            const colors = ['#ff1a4a', '#ff4d6a', '#ffb3c1', '#ffffff'];
+            (function frame() {
+                confetti({ particleCount: 10, angle: 60, spread: 55, origin: { x: 0 }, colors: colors, zIndex: 9999 });
+                confetti({ particleCount: 10, angle: 120, spread: 55, origin: { x: 1 }, colors: colors, zIndex: 9999 });
+                if (Date.now() < end) { requestAnimationFrame(frame); }
+            }());
+
+            document.getElementById('intro-step-6').style.display = 'none'; 
+            document.body.classList.add('pink-magic'); 
+            const gallery = document.getElementById('galleryPage'); 
+            gallery.style.display = 'block'; 
+            
+            bgMusic.play().catch(e => console.log("HBD Audio Error:", e));
+            
+            setTimeout(() => { 
+                gallery.style.opacity = '1'; 
+                startFloatingHearts(); 
+                renderCards(); 
+            }, 100); 
+        }
+        
+        // 🔥 GENERATING PURE CSS HEARTS TO FLOAT
+        function startFloatingHearts() { 
+            setInterval(() => { 
+                const heart = document.createElement("div"); 
+                heart.className = "floating-css-heart";
+                heart.style.left = Math.random() * 95 + "vw";
+                heart.style.animationDuration = (8 + Math.random() * 7) + "s";
+                
+                const scale = 0.5 + Math.random() * 0.8;
+                heart.style.transform = `scale(${scale}) rotate(-45deg)`;
+                
+                document.body.appendChild(heart); 
+                setTimeout(() => heart.remove(), 15000); 
+            }, 600); 
+        }
+
+        const textIcons = ['✧', '☆', '✿', '❀', '✦', '★', '❆'];
+
+        const cardsData = [
+            // 1st Song
+            { type: 'image', src: 'pic1.jpg', audio: 'song1.mp3', icon: '♡', frontText: 'Cutie Pie 🎀', lyrics: [
+                { time: 0, text: "🎵..." }, { time: 2, text: "Chaand si mehbooba ho meri... 🌙" }, { time: 6, text: "Kab aisa maine socha tha..." }, { time: 10, text: "Haan tum bilkul waisi ho... 💖" }, { time: 13, text: "Jaisa maine socha tha ✨" }
+            ] },
+            // 2nd Song
+            { type: 'image', src: 'pic2.jpg', audio: 'song2.mp3', icon: '✧', frontText: 'Your Smile 😊', lyrics: [
+                { time: 0, text: "Tu hi haqeeqat khwaab tu... ✨" }, { time: 4, text: "Dariya tu hi pyas tu... 🌊" }, { time: 8, text: "Tu hi dil ki beqarari... 💓" }, { time: 11, text: "Tu sukoon, tu sukoon... 🕊️" }
+            ] },
+            // 3rd Song
+            { type: 'image', src: 'pic3.jpg', audio: 'song3.mp3', icon: '☆', frontText: 'Noor ✨', lyrics: [ 
+                { time: 0, text: "🎵..." }, { time: 2, text: "Mukhde se tere aesa noor barse... ✨" }, { time: 6, text: "Fiki pade chand ki bhi chandni... 🌙" }, { time: 10, text: "Seene se laga ke rakhun jaan meri... 💖" } 
+            ] },
+            // 4th Song
+            { type: 'image', src: 'pic4.jpg', audio: 'song4.mp3', icon: '✿', frontText: 'Smile 😊', lyrics: [
+                { time: 0, text: "🎵..." }, { time: 2, text: "Akh meri hass deve... ✨" }, { time: 6, text: "Jadon tainu takk da... 👀" }, { time: 10, text: "Jaan ton vi zyada tu paas mainu lagda... 💖" }
+            ] },
+            // 5th Song
+            { type: 'image', src: 'pic5.jpg', audio: 'song5.mp3', icon: '♡', frontText: 'Phool Si 🌸', lyrics: [
+                { time: 0, text: "🎵..." }, { time: 2, text: "Chehra ek phool ki tarah shadab hai... 🌸" }, { time: 6, text: "Chehra uska hai ya koi mahtab hai... 🌙" }, { time: 10, text: "Chehra jaise ghazal, jaise kamal... 🪷" }
+            ] },
+            // 6th Song
+            { type: 'image', src: 'pic6.jpg', audio: 'song6.mp3', icon: '❀', frontText: 'Anmol ✨', lyrics: [
+                { time: 0, text: "🎵..." }, { time: 2, text: "Zameen tere paanv tale aayi... 🌍" }, { time: 6, text: "Khuda bhi jab tujhe mere paas dekhta hoga... ✨" }, { time: 10, text: "Itni anmol cheez de di, kaise sochta hoga... 🥺" }
+            ] },
+            // 7th Song
+            { type: 'image', src: 'pic7.jpg', audio: 'song7.mp3', icon: '✦', frontText: 'Noorani ✨', lyrics: [
+                { time: 0, text: "🎵..." }, { time: 2, text: "Hansta hua noorani chehra... ✨" }, { time: 5, text: "Kaali zulfen rang sunehra... 🖤" }, { time: 8, text: "Teri jawani tauba tauba re... 🙈" }, { time: 12, text: "Dilruba... dilruba... 💖" }
+            ] },
+            // 8th Song
+            { type: 'image', src: 'pic8.jpg', audio: 'song8.mp3', icon: '♥', frontText: 'Zindagi 🌍', lyrics: [
+                { time: 0, text: "🎵..." }, { time: 2, text: "Kuch bhi nahi hai ye jahan... 🌍" }, { time: 6, text: "Tu hai toh hai isme zindagi... ✨" }, { time: 10, text: "Tu hi safar hai aakhiri... 🛣️" }
+            ] },
+            // 9th Song
+            { type: 'image', src: 'pic9.jpg', audio: 'song9.mp3', icon: '♡', frontText: 'Aankhein 👀', lyrics: [
+                { time: 0, text: "🎵..." }, { time: 2, text: "Kaatil hain aankhein, par na inko saza hai... 👀" }, { time: 6, text: "Ghalti aankhon ki lage... 🫣" }, { time: 10, text: "Dil ki khata hai... ❤️‍🩹" }
+            ] },
+            // 10th Song
+            { type: 'image', src: 'pic10.jpg', audio: 'song10.mp3', icon: '✧', frontText: 'Tu Jaane Na 💔', lyrics: [
+                { time: 0, text: "🎵..." }, { time: 2, text: "Kaise batayein kyun tujhko chahein... 🥺" }, { time: 6, text: "Yaara bata na paayein... 🤐" }, { time: 10, text: "Tu jaane na... 💔" }
+            ] },
+            // 11th Song 
+            { type: 'image', src: 'pic11.jpg', audio: 'song11.mp3', icon: '♡', frontText: 'Nazarana ✨', lyrics: [
+                { time: 0, text: "🎵..." }, { time: 1, text: "Ho mere liye tu toh jaise rab ka hai nazrana... 🥺" }, { time: 4, text: "Tera deedar hua... ✨" }, { time: 7, text: "Pehla sa pyar hua... 💖" }
+            ] },
+            // 12th Song 
+            { type: 'image', src: 'pic12.jpg', audio: 'song12.mp3', icon: '✧', frontText: 'Dua 🤲', lyrics: [
+                { time: 0, text: "🎵..." }, { time: 1, text: "Main raat din ye dua karun... 🤲" }, { time: 4, text: "Tere liye main jiyun maroon... ❤️‍🔥" }, { time: 8, text: "Chaaro pehar tujhe dekha karun... 👀" }, { time: 11, text: "Mera jahaan yeh tujhpe fanaa karun... 🌍" }
+            ] },
+            // 13th Song 
+            { type: 'image', src: 'pic13.jpg', audio: 'song13.mp3', icon: '✿', frontText: 'Zindagi 🌸', lyrics: [
+                { time: 0, text: "Sun le sada... 🎵" }, { time: 4, text: "Kaisi dillagi hai tu... ✨" }, { time: 8, text: "Kaisi bebasi hai tu... 🥺" }, { time: 12, text: "Meri zindagi hai tu... ❤️" }
+            ] },
+            // 14th Song
+            { type: 'image', src: 'pic14.jpg', audio: 'song14.mp3', icon: '❀', frontText: 'Adaayein 💅', lyrics: [
+                { time: 0, text: "Aapse bhi haseen hain... ✨" }, { time: 5, text: "Aapki yeh adayein... 🙈" }, { time: 9, text: "Hum iss adaa pe kyun na marein... 💘" }, { time: 15, text: "Humein tumse hua hai pyaar... 🥺" }, { time: 18, text: "Hum kya karein... 🤷‍♂️" }
+            ] },
+            // 15th Song
+            { type: 'image', src: 'pic15.jpg', audio: 'song15.mp3', icon: '✦', frontText: 'Swag 😎', lyrics: [
+                { time: 0, text: "Karu nahi kade tanne cheat sun le... 🙅‍♂️" }, { time: 4, text: "Jo tanne na pasand woh delete sun le... 🗑️" }, { time: 7, text: "Love you re love you tere te itna... ❤️" }, { time: 11, text: "24 ghante chahe tu repeat sun le... 🔁" }
+            ] },
+            // 16th Song
+            { type: 'image', src: 'pic16.jpg', audio: 'song16.mp3', icon: '♥', frontText: 'Aashiqui ✨', lyrics: [
+                { time: 0, text: "Yeh mera dil gaya... 💘" }, { time: 4, text: "Bas dillagi dillagi mein... ✨" }, { time: 8, text: "Bhool ke do jahaan... 🌍" }, { time: 11, text: "Dooba teri aashiqui mein... 🌊" }, { time: 14, text: "Sochta hu sanam, iqraar kaise karun main... 🫣" }, { time: 19, text: "Pyaar ke dard ka, izhaar kaise karun main... ❤️‍🩹" }
+            ] },
+            // 17th Song 
+            { type: 'image', src: 'pic17.jpg', audio: 'song17.mp3', icon: '♡', frontText: 'Deewanagi ✨', lyrics: [
+                { time: 0, text: "Main tere, main tere qadmon mein... 🥺" }, { time: 3, text: "Rakh doon yeh jahaan... 🌍" }, { time: 6, text: "Mera ishq deewangi... ❤️‍🔥" }, { time: 10, text: "Hai nahi, hai nahi aashiq koi... ✨" }, { time: 14, text: "Mujh sa tera... 💖" }, { time: 17, text: "Tu mere liye bandagi... 🤲" }, { time: 20, text: "Main chahu tujhko... 🥺" }, { time: 23, text: "Meri jaan bepanah... ❤️" }
+            ] },
+            // 18th Song 
+            { type: 'image', src: 'pic18.jpg', audio: 'song18.mp3', icon: '✦', frontText: 'Mahila Mitr 😎', lyrics: [
+                { time: 0, text: "Khatak teri laagi bhitar te... 🔥" }, { time: 3, text: "Lyu ke main handu itar sa... ✨" }, { time: 7, text: "Yo aashiq ho gaya tera mureed... 🙇‍♂️" }, { time: 10, text: "Tu ban meri mahila mitr re... 😎💖" }
+            ] },
+            // 19th Song 
+            { type: 'image', src: 'pic19.jpg', audio: 'song19.mp3', icon: '✧', frontText: 'Pehra 👀', lyrics: [
+                { time: 0, text: "Bhari bheed mein dikh gaya chehra... 👀" }, { time: 4, text: "Woh chehra, un hothan pe... ✨" }, { time: 8, text: "Ek til de raha tha pehra... 🖤" }, { time: 12, text: "Main baatiyan sachi keh raha... 💯" }, { time: 15, text: "Fir keh raha, uski hassi ne... 🥺" }, { time: 20, text: "Dil mein zakhm kar diya ghana gehra... ❤️‍🩹" }, { time: 23, text: "Wa jab jab deve haas... 😊" }, { time: 26, text: "Mera phool jaave saans... 😮‍💨" }, { time: 28, text: "Dil chakkar khawe re... 😵‍💫" }, { time: 32, text: "Main jab jab dekhun chaand... 🌙" }, { time: 35, text: "Manne wa yaad aave re... 🥺" }
+            ] },
+            // 20th Song
+            { type: 'image', src: 'pic20.jpg', audio: 'song20.mp3', icon: '❀', frontText: 'Bulleya ✨', lyrics: [
+                { time: 0, text: "Tu baat kare ya na mujhse... 🥺" }, { time: 4, text: "Chahe aankhon ka payaam na le... 👀" }, { time: 8, text: "Par ye mat kehna aare pagle... 🙅‍♂️" }, { time: 12, text: "Mujhe dekh na tu, mera naam na le... 💔" }, { time: 16, text: "Tujhse mera deen dharam hai... 🤲" }, { time: 24, text: "Tu bole toh ban jaun main Bulleh Shah saudai... ✨" }, { time: 29, text: "Main bhi nachu manau sohne yaar ko... 🕺" }, { time: 36, text: "Chalu main teri raah Bulleya... 🛣️" }
+            ] },
+            // 21st Song
+            { type: 'image', src: 'pic21.jpg', audio: 'song21.mp3', icon: '♥', frontText: 'Zaalima 💘', lyrics: [
+                { time: 0, text: "Jo teri khatir tadpe... ❤️‍🔥" }, { time: 3, text: "Pehle se hi, kya usey tadpana... 🥺" }, { time: 7, text: "O zalima... 💘" }, { time: 9, text: "O zalima... ✨" }
+            ] }
+        ];
+
+        cardsData.push({ type: 'letter_modal', icon: '✉', frontText: 'A Letter For You' });
+
+        let currentAudio = null; 
+        
+        function renderCards() {
+            const grid = document.getElementById('photoGrid');
+            
+            cardsData.forEach((data, index) => {
+                const wrapper = document.createElement('div'); wrapper.className = 'polaroid-wrapper';
+                const frontContent = `<div class="polaroid-front"><div class="pink-square"><div class="icon">${data.icon}</div></div><h3>${data.frontText}</h3></div>`;
+                let backContent = '';
+                
+                if (data.type === 'image') {
+                    // 🐻 ADDED THE BEAR STICKER BACK HERE!
+                    backContent = `
+                        <div class="polaroid-back">
+                            <img src="bear_sticker.png" class="bear-sticker" alt="Peeking Bear">
+                            <img src="${data.src}" alt="Photo" class="main-photo">
+                            <div class="lyrics-box"><p class="lyrics-text" id="lyrics-${index}">🎵 Tap to play...</p></div>
+                        </div>`;
+                } else if (data.type === 'letter_modal') {
+                    backContent = `<div class="polaroid-back" style="justify-content: center; align-items: center; background: #fffdf5; border: 2px solid #ff4d6a;"><h3 style="font-size: 1.5rem; color: #d81b60; margin-bottom: 20px; font-weight: 600;">For You 💌</h3><button class="btn btn-yes" onclick="openLetter(event)" style="padding: 12px 25px;">Read Letter 📖</button></div>`;
+                }
+                const inner = document.createElement('div'); inner.className = 'polaroid-inner'; inner.innerHTML = frontContent + backContent;
+                inner.onclick = () => handleCardTap(inner, data, index); wrapper.appendChild(inner); grid.appendChild(wrapper);
+            });
+        }
+        
+        function handleCardTap(cardElement, cardData, index) {
+            if (bgMusic && !bgMusic.paused) { bgMusic.pause(); }
+
+            if (cardData.type === 'letter_modal') {
+                cardElement.classList.toggle('flipped');
+                return; 
+            }
+            
+            cardElement.classList.toggle('flipped');
+            if (currentAudio) { currentAudio.pause(); currentAudio.currentTime = 0; currentAudio.ontimeupdate = null; }
+            if (cardElement.classList.contains('flipped')) {
+                currentAudio = new Audio(cardData.audio); currentAudio.play().catch(e => console.log("Audio play error:", e));
+                if (cardData.type === 'image' && cardData.lyrics) {
+                    const lyricsElement = document.getElementById(`lyrics-${index}`);
+                    currentAudio.ontimeupdate = () => { const currentTime = currentAudio.currentTime; let activeText = cardData.lyrics[0].text; for (let i = 0; i < cardData.lyrics.length; i++) { if (currentTime >= cardData.lyrics[i].time) { activeText = cardData.lyrics[i].text; } } lyricsElement.innerText = activeText; };
+                }
+            }
+        }
+        
+        // 🌟 MAGICAL LETTER LOGIC (ROMANTIC THEME)
+        const letterMessage = "Happy Birthday! ❤️\n\nTumne kaha tha na ki ladkiyan 'efforts' aur 'pyaar jatane ke tareeke' par marti hain... Toh socha is baar apni baatein kisi drama ke hero ki tarah nahi, balki apne tareeke se bayaan karu.\n\nYe website, in gaano ki ek-ek second ki timing, aur ye codes... ye sab mere liye sirf mehnat nahi, meri wo feelings hain jo main shayad aise hi lafzon mein na keh pau. \n\nYeh ek chhota sa digital jahaan hai jo maine sirf tumhare liye banaya hai, taaki internet ke is kone mein tumhara ye din hamesha ke liye mehfooz rahe.\n\nTum sach mein bohot khaas ho. Hamesha aise hi muskurati raho.\n\n- Sirf Tumhara Panther 🐾";
+
+        let typingTimeout;
+        let letterAudio = new Audio('letter_song.mp3');
+
+        function openLetter(event) { 
+            event.stopPropagation(); 
+            const modal = document.getElementById('letterModal');
+            modal.classList.remove('hidden'); 
+            
+            if (currentAudio) { currentAudio.pause(); }
+            if (bgMusic && !bgMusic.paused) { bgMusic.pause(); }
+
+            letterAudio.currentTime = 0;
+            letterAudio.play().catch(e => console.log("Letter Audio Error:", e));
+            
+            setTimeout(() => { modal.classList.add('show'); }, 50);
+
+            const textContainer = document.getElementById('typewriterText');
+            textContainer.innerHTML = ''; 
+            let i = 0;
+            
+            function typeWriter() {
+                if (i < letterMessage.length) {
+                    if(letterMessage.charAt(i) === '\n') {
+                        textContainer.innerHTML += '<br>';
+                    } else {
+                        textContainer.innerHTML += letterMessage.charAt(i);
+                    }
+                    i++;
+                    document.querySelector('.glass-box').scrollTop = document.querySelector('.glass-box').scrollHeight;
+                    typingTimeout = setTimeout(typeWriter, 50); 
+                }
+            }
+            setTimeout(typeWriter, 1000);
+        }
+
+        function closeLetter() { 
+            const modal = document.getElementById('letterModal');
+            modal.classList.remove('show');
+            setTimeout(() => { modal.classList.add('hidden'); }, 800);
+            clearTimeout(typingTimeout);
+            letterAudio.pause();
+        }
+    </script>
 </body>
 </html>
